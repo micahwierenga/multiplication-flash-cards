@@ -1,31 +1,40 @@
-.incorrect-answer {
-	animation: incorrect-answer 600ms linear;
+html, body {
+	height: 100%;
+	font-size: 100px;
 }
-@keyframes incorrect-answer {
-	0% {
-		background-color: #FF0000;
-		opacity: 1;
-	}
-	90% {
-		background-color: #FFFFFF;
-	}
-	100% {
-		background-color: rgba( 255, 255, 255, 0 );
-	}
+body {
+	text-align: center;
+    font-size: 75%;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    /*background-color: #c47e5b;*/
+}
+.multiplication-problem {
+	height: 25%;
+    max-width: 120px;
+    margin: auto;
+    text-align: center;
 }
 
-.correct-answer {
-	animation: correct-answer 600ms linear;
+/* DivTable.com */
+.divTable{
+	display: table;
+	width: 100%;
 }
-@keyframes correct-answer {
-	0% {
-		background-color: #00FF00;
-		opacity: 1;
-	}
-	90% {
-		background-color: #FFFFFF;
-	}
-	100% {
-		background-color: rgba( 255, 255, 255, 0 );
-	}
+.divTableRow {
+	display: table-row;
+}
+.divTableCell {
+	border: 1px solid white;
+	display: table-cell;
+	padding: 3px 10px;
+	font-size: 25%;
+}
+.divTableBody {
+	display: table-row-group;
+}
+#product {
+	max-width: 50%;
+	text-align: center;
+	height: 20%;
+	color: #5BA4C4;
 }

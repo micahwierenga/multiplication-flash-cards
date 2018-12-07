@@ -1,69 +1,94 @@
-function generateRandomNumber() {
-	let range = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-	return range[Math.floor( Math.random() * range.length )];
-}
-
-function createMultiplicationProblem( multiplicand, multiplier ) {
-	let newMultiplicand = ( multiplicand !== null ) ? multiplicand : generateRandomNumber();
-	let newMultiplier = ( multiplier !== null ) ? multiplier : generateRandomNumber();
-	let product = newMultiplicand * newMultiplier;
-
-	document.getElementById( 'multiplicand' ).append( newMultiplicand );
-	document.getElementById( 'multiplier' ).append( newMultiplier );
-	document.getElementById( 'productInput' ).setAttribute( 'data', product );
-}
-
-function clearNumberDivsAndInput() {
-	document.getElementById( 'multiplicand' ).innerHTML = '';
-	document.getElementById( 'multiplier' ).innerHTML = '';
-	document.getElementById( 'productInput' ).value = '';
-}
-
-function colorAndFadeBackground( color ) {
-	let green = ( color === '#00FF00' ) ? 255 : 0;
-	let red = ( color === '#FF0000' ) ? 255 : 0;
-	let opacity = 1;
-	let target = document.getElementById( 'bodyBackground' );
-	target.style.background = color;
-	let fadeEffect = setInterval( function() {
-		if( !target.style.backgroundColor ) {
-			target.style.backgroundColor = "rgba( " + red + ", " + green + ", 0, " + opacity + " )";
-		}
-		if( opacity > 0 ) {
-			target.style.backgroundColor = "rgba( " + red + ", " + green + ", 0, " + opacity + " )";
-			opacity -= 0.1;
-		} else {
-			clearInterval( fadeEffect );
-		}
-	}, 50 );
-}
-
-function checkAnswer() {
-	let submittedAnswer = document.getElementById( 'productInput' ).value;
-	let correctAnswer = document.getElementById( 'productInput' ).getAttribute( 'data' );
-	if( submittedAnswer === correctAnswer ) {
-		// colorAndFadeBackground( '#00FF00' );
-		// clearNumberDivsAndInput();
-		// createMultiplicationProblem();
-		handleAnswer( true );
-	} else {
-		
-
-		// colorAndFadeBackground(  );
-		// clearNumberDivsAndInput();
-		// createMultiplicationProblem( existingMultiplicand, existingMultiplier );
-		handleAnswer( false );
+$(function(){
+	let divTableCellBackgroundColor = '#5BA4C4';
+	$( '.divTableCell' ).css( 'background-color', divTableCellBackgroundColor );
+	function generateRandomNumber() {
+		let range = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+		return range[Math.floor( Math.random() * range.length )];
 	}
+
+	function createMultiplicationProblem( multiplicand, multiplier ) {
+		$( '#productInput' ).html( '' );
+		let newMultiplicand = ( multiplicand !== null ) ? multiplicand : generateRandomNumber();
+		let newMultiplier = ( multiplier !== null ) ? multiplier : generateRandomNumber();
+		let product = newMultiplicand * newMultiplier;
+
+		$( '#multiplicand' ).html( newMultiplicand );
+		$( '#multiplier' ).html( newMultiplier );
+		$( '#productInput' ).attr( 'data', product );
+	}
+
+	$( '#productInput' ).on( 'keyup', function() {
+		let answerLength = $( '#productInput' ).val().length;
+		let productLength = $( '#productInput' ).attr( 'data' ).length;
+		if( answerLength == productLength ) {
+			checkAnswer();
+		}
+	})
+
+	$( '.divTableCell' ).click( function() {
+		// if( this.attr( 'data' ) != 'delete' ) {
+		// 	$( '#productInput' ).append( this.attr( 'data' ) );
+		// }
+		if( !$( this ).hasClass( 'ignore' ) ) {
+			$( '#productInput' ).append( $( this ).html() );
+		}
+		if( $( '#productInput' ).html().length == $( '#productInput' ).attr( 'data' ).length ) {
+			checkAnswer()
+		}
+	})
+
+	function checkAnswer() {
+		let submittedAnswer = $( '#productInput' ).html();
+		let correctAnswer = $( '#productInput' ).attr( 'data' );
+		if( submittedAnswer === correctAnswer ) {
+			handleAnswer( true );
+		} else {
+			handleAnswer( false );
+		}
+	}
+
+	function handleAnswer( isRight ) {
+		let color = isRight ? 'green' : 'red';
+		colorAndFadeBackground( color, isRight );
+	}
+
+	function setUpNextProblem( isRight ) {
+		let existingMultiplicand = isRight ? null : $( '#multiplicand' ).html();
+		let existingMultiplier = isRight ? null : $( '#multiplier' ).html();
+		clearNumberDivsAndInput();
+		createMultiplicationProblem( existingMultiplicand, existingMultiplier );
+	}
+
+
+	function colorAndFadeBackground( color, isRight ) {
+		let target = $( '#bodyBackground' );
+		let green = ( color === 'green' ) ? 100 : 0;
+		let red = ( color === 'red' ) ? 100 : 0;
+		let opacity = 1;
+		let createNewProblem = false;
+		target.css( 'background', color );
+		let fadeEffect = setInterval( function() {
+			if( !target.css( 'background-color' ) ) {
+				let backgroundColor = "rgba( " + red + ", " + green + ", 0, " + opacity + " )";
+				target.css( 'background-color', backgroundColor );
+			}
+			if( opacity > 0 ) {
+				let backgroundColor = "rgba( " + red + ", " + green + ", 0, " + opacity + " )";
+				target.css( 'background-color', backgroundColor );
+				opacity -= 0.1;
+			} else {
+				clearInterval( fadeEffect );
+				setUpNextProblem( isRight );
+			}
+		}, 50 );
+	}
+
 	
-}
 
-function handleAnswer( isRight ) {
-	let color = isRight ? '#00FF00' : '#FF0000';
-	let existingMultiplicand = isRight ? null : document.getElementById( 'multiplicand' ).innerHTML;
-	let existingMultiplier = isRight ? null : document.getElementById( 'multiplier' ).innerHTML;
-	colorAndFadeBackground( color );
-	clearNumberDivsAndInput();
-	createMultiplicationProblem( existingMultiplicand, existingMultiplier );
-}
+	function clearNumberDivsAndInput() {
+		$( '#multiplicand' ).html( '' );
+		$( '#multiplier' ).html( '' );
+	}
+	createMultiplicationProblem( null, null );
 
-createMultiplicationProblem( null, null );
+});
