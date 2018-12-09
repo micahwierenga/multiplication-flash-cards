@@ -1,6 +1,13 @@
 $(function(){
-	let divTableCellBackgroundColor = '#5BA4C4';
+	let divTableCellBackgroundColor = '#1F2833';
 	$( '.divTableCell' ).css( 'background-color', divTableCellBackgroundColor );
+	$( '.problem-container' ).css( 'background-color', divTableCellBackgroundColor );
+	$( ".divTableCell" ).on( 'mouseover', function () {
+		$( this ).css( 'filter', 'brightness( 75% )' );
+	}).on( 'mouseout', function () {
+		$( this ).css( 'filter', 'brightness( 100% )' );
+	});
+
 	function generateRandomNumber() {
 		let range = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 		return range[Math.floor( Math.random() * range.length )];
@@ -26,9 +33,6 @@ $(function(){
 	})
 
 	$( '.divTableCell' ).click( function() {
-		// if( this.attr( 'data' ) != 'delete' ) {
-		// 	$( '#productInput' ).append( this.attr( 'data' ) );
-		// }
 		if( !$( this ).hasClass( 'ignore' ) ) {
 			$( '#productInput' ).append( $( this ).html() );
 		}
@@ -59,21 +63,20 @@ $(function(){
 		createMultiplicationProblem( existingMultiplicand, existingMultiplier );
 	}
 
-
 	function colorAndFadeBackground( color, isRight ) {
 		let target = $( '#bodyBackground' );
-		let green = ( color === 'green' ) ? 100 : 0;
-		let red = ( color === 'red' ) ? 100 : 0;
+		let startingColor = ( color === 'green' ) ? '69, 162, 158, ' : '162, 91, 69, ';
+		// let red = ( color === 'red' ) ? 100 : 0;
 		let opacity = 1;
 		let createNewProblem = false;
-		target.css( 'background', color );
+		// target.css( 'background', startingColor );
 		let fadeEffect = setInterval( function() {
 			if( !target.css( 'background-color' ) ) {
-				let backgroundColor = "rgba( " + red + ", " + green + ", 0, " + opacity + " )";
+				let backgroundColor = "rgba( " + startingColor + opacity + " )";
 				target.css( 'background-color', backgroundColor );
 			}
 			if( opacity > 0 ) {
-				let backgroundColor = "rgba( " + red + ", " + green + ", 0, " + opacity + " )";
+				let backgroundColor = "rgba( " + startingColor + opacity + " )";
 				target.css( 'background-color', backgroundColor );
 				opacity -= 0.1;
 			} else {

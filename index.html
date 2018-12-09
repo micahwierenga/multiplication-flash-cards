@@ -2,39 +2,42 @@
 <html>
 <head>
 	<title>Multiplication Flash Cards</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body id="bodyBackground">
-	<div>
-		<span id="multiplicand" class="multiplication-problem"></span> x <span id="multiplier" class="multiplication-problem"></span>
-	</div>
+	<div class="problem-container">
+		<div id="problem">
+			<span id="multiplicand" class="multiplication-problem"></span> x <span id="multiplier" class="multiplication-problem"></span>
+		</div>
 
-	<div id="product" class="multiplication-problem">
-		<div id="productInput"></div>
-	</div>
+		<div id="product" class="multiplication-problem">
+			<div id="productInput"></div>
+		</div>
 
-	<div class="divTable">
-		<div class="divTableBody">
-			<div class="divTableRow">
-				<div class="divTableCell">1</div>
-				<div class="divTableCell">2</div>
-				<div class="divTableCell">3</div>
-			</div>
-			<div class="divTableRow">
-				<div class="divTableCell">4</div>
-				<div class="divTableCell">5</div>
-				<div class="divTableCell">6</div>
-			</div>
-			<div class="divTableRow">
-				<div class="divTableCell">7</div>
-				<div class="divTableCell">8</div>
-				<div class="divTableCell">9</div>
-			</div>
-			<div class="divTableRow">
-				<div class="divTableCell ignore">&nbsp;</div>
-				<div class="divTableCell">0</div>
-				<div class="divTableCell ignore">C</div>
+		<div class="divTable">
+			<div class="divTableBody">
+				<div class="divTableRow">
+					<div id="button1" class="divTableCell">1</div>
+					<div id="button2" class="divTableCell">2</div>
+					<div id="button3" class="divTableCell">3</div>
+				</div>
+				<div class="divTableRow">
+					<div id="button4" class="divTableCell">4</div>
+					<div id="button5" class="divTableCell">5</div>
+					<div id="button6" class="divTableCell">6</div>
+				</div>
+				<div class="divTableRow">
+					<div id="button7" class="divTableCell">7</div>
+					<div id="button8" class="divTableCell">8</div>
+					<div id="button9" class="divTableCell">9</div>
+				</div>
+				<div class="divTableRow">
+					<div id="button-blank" class="divTableCell ignore">&nbsp;</div>
+					<div id="button0" class="divTableCell">0</div>
+					<div id="buttonC" class="divTableCell ignore">C</div>
+				</div>
 			</div>
 		</div>
 	</div>
